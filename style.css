@@ -1,0 +1,25 @@
+body {
+	font-family: Lato;
+}
+
+#body-overlay, #body-overlay .grid {
+	height: 100%;
+	background: rgba(255,255,255,0.8)
+}
+
+#body-overlay .column{
+	text-align: center;
+}
+
+#body-overlay .ui input {
+	margin: 10px;
+	width: 250px;
+}
+
+.options {
+	margin: 10px 0 20px;
+}
+
+button.ui.primary.button {
+	background: #21d060;
+}
