@@ -192,8 +192,8 @@
       // <area> element 'poly' which traces out a polygon as a series of X,Y points.
       // The final coordinate closes the poly by connecting to the first coordinate.
       var shape = {
-        coords: [1, 1, 1, 20, 18, 20, 18, 1],
-        type: 'poly'
+        coords: [0, 0, 50],
+        type: 'circle'
       };
       for (var i = 0; i < destinations.length; i++) {
          var image = {
@@ -233,15 +233,27 @@
         mapTypeId: 'Styled'
       })
       var styledMapType = new google.maps.StyledMapType(styles, {name: 'Styled'});
-      map.mapTypes.set('Styled', styledMapType)
-,
-      setMarkers(map);
+      map.mapTypes.set('Styled', styledMapType);
 
       var directionsService = new google.maps.DirectionsService;
+      var shape = {
+        coords: [25, 25, 30],
+        type: 'circle'
+      };
+
+      var mOptions = {
+          draggable: true,
+          map: map,
+          icon: album_covers[(Math.floor(Math.random() * destinations.length))],
+          shape: shape,
+          zIndex: 3
+        }
+
       var directionsDisplay = new google.maps.DirectionsRenderer({
         draggable: true,
         map: map,
-        panel: document.getElementById('right-panel')
+        panel: document.getElementById('right-panel'),
+        markerOptions: mOptions
       });
 
       directionsDisplay.addListener('directions_changed', function() {
