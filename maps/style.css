@@ -29,15 +29,24 @@ body {
   float: left;
   width: 63%;
   height: 100%;
+  padding: 0;
 }
 
 #right-panel {
   float: right;
   width: 34%;
-  height: 100%;
+  overflow: scroll;
+  height: 83%;
 }
 
 .panel {
   height: 100%;
   overflow: auto;
+}
+
+#spotify {
+  float: right;
+  margin-top: 2.2%;
+  width: 37%;
+  height: 15%;
 }
