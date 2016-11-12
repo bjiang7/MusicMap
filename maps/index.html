@@ -21,50 +21,54 @@
       ['New York, NY', 40.7128, -74.0059, 4],
     ];
 
-              var album_covers = ['http://images.contactmusic.com/images/press/vampire-weekend-modern-vampires-of-the-city-300-cover.jpg',
-              'https://upload.wikimedia.org/wikipedia/en/1/11/Bad_things_cover_art.jpg',
-              'https://upload.wikimedia.org/wikipedia/en/f/fd/Lady_Gaga_-_Joanne_(Official_Album_Cover).png',
-              'https://upload.wikimedia.org/wikipedia/en/8/8e/MichaelBuble-Christmas(2011)-Cover.png'
-            ];
+    var album_covers =
+    ['http://images.contactmusic.com.rsz.io/images/press/vampire-weekend-modern-vampires-of-the-city-300-cover.jpg?width=50',
+      'http://upload.wikimedia.org.rsz.io/wikipedia/en/1/11/Bad_things_cover_art.jpg?width=50',
+      'http://upload.wikimedia.org.rsz.io/wikipedia/en/f/fd/Lady_Gaga_-_Joanne_(Official_Album_Cover).png?width=50',
+      'http://upload.wikimedia.org.rsz.io/wikipedia/en/8/8e/MichaelBuble-Christmas(2011)-Cover.png?width=50'
+    ];
 
-function setMarkers(map) {
-  // Adds markers to the map.
+    function setMarkers(map) {
+      // Adds markers to the map.
 
-  // Marker sizes are expressed as a Size of X,Y where the origin of the image
-  // (0,0) is located in the top left of the image.
+      // Marker sizes are expressed as a Size of X,Y where the origin of the image
+      // (0,0) is located in the top left of the image.
 
-  // Origins, anchor positions and coordinates of the marker increase in the X
-  // direction to the right and in the Y direction down.
-  var image = {
-    url: 'http://gagadaily.com.rsz.io/uploads/stories/monthly_2016_09/joanne.jpg.a6d8d6fd6e671a82ae75e80925ff43d3.jpg?width=50',
-    //url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-    // This marker is 20 pixels wide by 32 pixels high.
-    size: new google.maps.Size(50, 50),
-    // The origin for this image is (0, 0).
-    origin: new google.maps.Point(0, 0),
-    // The anchor for this image is the base of the flagpole at (0, 32).
-    anchor: new google.maps.Point(0, 32),
-    //draggable: true
-  };
-  // Shapes define the clickable region of the icon. The type defines an HTML
-  // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-  // The final coordinate closes the poly by connecting to the first coordinate.
-  var shape = {
-    coords: [1, 1, 1, 20, 18, 20, 18, 1],
-    type: 'poly'
-  };
-  for (var i = 0; i < destinations.length; i++) {
-    var dest = destinations[i];
-    var marker = new google.maps.Marker({
-      position: {lat: dest[1], lng: dest[2]},
-      map: map,
-      icon: image,
-      shape: shape,
-      title: dest[0],
-      zIndex: dest[3]
-    });
-  }
-}
+      // Origins, anchor positions and coordinates of the marker increase in the X
+      // direction to the right and in the Y direction down.
+      // Shapes define the clickable region of the icon. The type defines an HTML
+      // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+      // The final coordinate closes the poly by connecting to the first coordinate.
+      var shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: 'poly'
+      };
+      for (var i = 0; i < destinations.length; i++) {
+         var image = {
+           url: album_covers[i],
+           //url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+           // This marker is 20 pixels wide by 32 pixels high.
+           size: new google.maps.Size(50, 50),
+           // The origin for this image is (0, 0).
+           origin: new google.maps.Point(0, 0),
+           // The anchor for this image is the base of the flagpole at (0, 32).
+           anchor: new google.maps.Point(0, 32),
+           //draggable: true
+         };
+        var dest = destinations[i];
+        var marker = new google.maps.Marker({
+          position: {
+            lat: dest[1],
+            lng: dest[2]
+          },
+          map: map,
+          icon: image,
+          shape: shape,
+          title: dest[0],
+          zIndex: dest[3]
+        });
+      }
+    }
 
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
@@ -154,7 +158,6 @@ function setMarkers(map) {
       total = total / 1000;
       document.getElementById('total').innerHTML = total + ' km';
     }
-
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa1eT22GzsTHqGeEz2podc71M-WqmTMjU&callback=initMap">
   </script>
