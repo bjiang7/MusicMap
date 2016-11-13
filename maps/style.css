@@ -1,15 +1,31 @@
 body {
   font-family: Lato;
-  /*overflow:hidden;*/
+  overflow:hidden;
+}
+h1.ui.header {
+  font-weight: 300;
+  color: #21d060;
+  font-size:46px;
 }
 #body-overlay {
     position: absolute;
     z-index: 100;
     width: 100%;
 }
-#body-overlay, #body-overlay .grid {
+#body-overlay, #body-overlay .maps-bg {
+  height: 105%;
+}
+
+#body-overlay .grid {
   height: 100%;
-  background: rgba(255,255,255,0.55)
+}
+
+#body-overlay .grid {
+  background: rgba(255,255,255,0.8);
+}
+
+#body-overlay .maps-bg {
+  background: url(bg.png) center;
 }
 
 #body-overlay .column{
@@ -59,15 +75,17 @@ body {
 #map {
   height: 100%;
   float: left;
-  width: 63%;
+  width: 73%;
   padding: 0;
 }
 
 #right-panel {
   float: right;
-  width: 34%;
+  width: 27%;
+  padding:50px;
   overflow: auto;
-  height: 83%;
+  height: 88%;
+  padding-bottom:0;
 }
 
 .panel {
@@ -77,8 +95,7 @@ body {
 
 #spotify {
   float: right;
-  margin-top: 2.2%;
-  width: 37%;
+  width: 27%;
   height: 15%;
 }
 
