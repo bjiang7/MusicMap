@@ -1,5 +1,37 @@
+body {
+  font-family: Lato;
+  /*overflow:hidden;*/
+}
+#body-overlay {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+}
+#body-overlay, #body-overlay .grid {
+  height: 100%;
+  background: rgba(255,255,255,0.55)
+}
+
+#body-overlay .column{
+  text-align: center;
+}
+
+#body-overlay .ui input {
+  margin: 10px;
+  width: 250px;
+}
+
+.options {
+  margin: 10px 0 20px;
+}
+
+button.ui.primary.button {
+  background: #21d060;
+}
+#right {
+  height: 100%;
+}
 #right-panel {
-  font-family: 'Roboto', 'sans-serif';
   line-height: 30px;
   padding-left: 10px;
 }
@@ -28,14 +60,13 @@ body {
   height: 100%;
   float: left;
   width: 63%;
-  height: 100%;
   padding: 0;
 }
 
 #right-panel {
   float: right;
   width: 34%;
-  overflow: scroll;
+  overflow: auto;
   height: 83%;
 }
 
@@ -50,3 +81,4 @@ body {
   width: 37%;
   height: 15%;
 }
+
