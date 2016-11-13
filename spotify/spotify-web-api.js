@@ -1,6 +1,5 @@
 /* global module */
 'use strict';
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var SpotifyWebApi = (function() {
 
   var _baseUri = 'https://api.spotify.com/v1';
@@ -23,8 +22,8 @@ var SpotifyWebApi = (function() {
       });
       returnedPromise = deferred.promise;
     } else {
-      if (global.Promise) {
-        returnedPromise = new global.Promise(promiseFunction);
+      if (window.Promise) {
+        returnedPromise = new window.Promise(promiseFunction);
       }
     }
 
