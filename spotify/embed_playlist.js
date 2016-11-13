@@ -4,7 +4,7 @@ http.createServer(function(request, response) {
   response.write("Hello from the Node.js server!");  
   response.end();
 }).listen(3000);
-console.log('Server is listening to http://localhost/ on port 3000…');
+console.log('Running on localhost:3000…');
 
 var SpotifyWebApi = require('spotify-web-api-js');
 var passport = require('passport-spotify');
@@ -12,17 +12,7 @@ var spotifyApi = new SpotifyWebApi();
 
 spotifyApi.setAccessToken("5da88054df974a3881337d30f15d6b77");
 
-// passport.use(new SpotifyStrategy({
-//     clientID: "5da88054df974a3881337d30f15d6b77",
-//     clientSecret: "db60e4523eca4a5fb7790ed373e8ec31",
-//     callbackURL: "http://localhost:3000/auth/spotify/callback"
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//     User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
-//       return done(err, user);
-//     });
-//   }
-// ));
+var esri = require('arcgis_js_api/library/4.1/4.1/esri/request', function(esriRequest) {});
 
 // Output: a playlist JSON
 function get_time_playlist() {
@@ -62,6 +52,56 @@ function get_time_playlist() {
 			}, function(err) {
 				console.error(err);
 			});
+	}
+}
+
+function get_weather_playlist() {
+	var request = esriRequest({
+	  url: "http://w1.weather.gov/xml/current_obs/KPVD.xml",
+	  handleAs: "xml"
+	});
+	
+	var weather;
+
+	request.then(
+	  function (data) {
+	    weather = data;
+	  },
+	  function (error) {
+	    console.log(error.message);
+	    return;
+	  }
+	);
+
+	parser = new DOMParser();
+	xmlDoc = parser.parseFromString(weather, "text/xml");
+
+	var status = xmlDoc.getElementsByTagName("Weather")[0].childNodes[0].nodeValue;
+	status = status.toLowerCase();
+
+	if (status.indexOf("sun") !== -1) {
+		spotifyApi.getPlaylist('queennlilymello', '7zkC8xhjOSnJzYZ69irOzv')
+			.then(function(data) {
+				return data;
+			}, function(err) {
+				console.error(err);
+			});
+	} else if (status.indexOf("cloud") !== -1) {
+		spotifyApi.getPlaylist('ness938', '42j8xmaZ5h9ntEYmRRH81P')
+			.then(function(data) {
+				return data;
+			}, function(err) {
+				console.error(err);
+			});
+	} else if (status.indexOf("rain") !== -1) {
+		spotifyApi.getPlaylist('spotify', '7CQunpJEHecknIyABfS8pP')
+			.then(function(data) {
+				return data;
+			}, function(err) {
+				console.error(err);
+			});
+	} else {
+		return;
 	}
 }
 
