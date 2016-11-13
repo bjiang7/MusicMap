@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>MusicMap</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
+  <link rel="stylesheet" href="icon.min.css">
+  <link rel="stylesheet" href="semantic.min.css">
+  <link rel="stylesheet" href="style.css">
+
+
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="body-overlay" class="ui container">
+    <div class="maps-bg">
+      <div class="ui one column centered grid">
+        <div class="middle aligned row">
+          <div class="column">
+            <h1 class="ui header">
+              Music Map
+            </h1>
+            <em>Generate a personalized playlist for your road trip or drive around the block. <br/>Crafts the perfect combination of tunes based on your trip length, road conditions, weather, location, and time. <br/><br/></em>
+            <div class="ui input">
+              <input id="depart" type="text" placeholder="Enter the start of your trip">
+            </div>
+            <br />
+            <div class="ui input">
+              <input id="arrive" type="text" placeholder="Enter the end of your trip">
+            </div>
+            <div class="options">
+              Advanced Options
+            </div>
+            <button id="create-playlist" class="ui primary button">
+              <i class="music icon"></i>
+              Generate Playlist
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="map"></div>
+  <div id="right">
+    <div id="right-panel" style="display:none">
+      <p>Total Distance: <span id="total"></span></p>
+    </div>
+    <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Amusicmapplaylists%3Aplaylist%3A4nAQcJiGBhNB8vobVjb3nx" width="345" height="100" frameborder="0" allowtransparency="true"></iframe>
+
+<div id="album-covers">
+      <div class="ui two column grid">
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="http://static.musictoday.com/store/bands/93/product_large/MUDD3036.JPG">
+              <h3 class="overlay_text">
+                Jack Johnson - Banana Pancakes
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="http://www.panicmanual.com/wp-content/uploads/2008/10/walking_on_a_dream_cover.jpg">
+              <h3 class="overlay_text">
+                Empire of the Sun - Walking On A Dream
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="https://s-media-cache-ak0.pinimg.com/originals/a5/8f/d8/a58fd8a6baf6ff882a36f6f3a2afe3a5.jpg">
+              <h3 class="overlay_text">
+                Ed Sheeran - Sunburn - Deluxe Edition
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="http://www.repeatfanzine.co.uk/Images/richard's%20review%20iamges/joey/drums.jpg">
+              <h3 class="overlay_text">
+                The Drums - Let's Go Surfing
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="http://stagebuddy.com/wp-content/uploads/2014/06/tumblr_n55rlg3KwR1smpt6lo1_1280.jpg">
+              <h3 class="overlay_text">
+                Bad Suns - We Move Like the Ocean
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="http://www.dustinfrancis.com/wp-content/uploads/2010/11/The-First-Days-of-Spring.jpg">
+              <h3 class="overlay_text">
+                Noah And The Whale - Blue Skies
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="http://covers.sndstatic.com/2016/09/19/1830676-sweet-madness-300.jpg">
+              <h3 class="overlay_text">
+                Empire of the Sun - Alive
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="https://images.rapgenius.com/6ea45a91d32294254f0c9c162423c8d4.1000x1000x1.png">
+              <h3 class="overlay_text">
+                Miley Cyrus - Drive
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="http://popcrush.com/files/2013/08/miley-cyrus-bangerz-deluxe.jpg">
+              <h3 class="overlay_text">
+                The Killers - Mr. Brightside
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="https://rutorch.files.wordpress.com/2014/03/retrospective-2004-the-killers-hot-fuss.jpg">
+              <h3 class="overlay_text">
+                Simon & Garfunkel - Cecilia
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="http://resources.wimpmusic.com/images/19402d16/c052/4a4f/8c5f/6e1105b41f9b/1280x1280.jpg">
+              <h3 class="overlay_text">
+                Faces - Ooh La La
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="http://www.genesis-news.com/media/news/ly.jpg">
+              <h3 class="overlay_text">
+                Mike & The Mechanics - The Living Years
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="http://c.directlyrics.com/img/upload/calvin-harris-my-way.jpg">
+              <h3 class="overlay_text">
+                Calvin Harris - My Way
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="https://images-na.ssl-images-amazon.com/images/I/41ZsWDiEvfL._SY300_.jpg">
+              <h3 class="overlay_text">
+                The Lumineers - Morning Song
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="https://i.ytimg.com/vi/VgVuZLyMqS8/maxresdefault.jpg">
+              <h3 class="overlay_text">
+                Maroon 5 - Sunday Morning
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="http://static.djbooth.net/pics-albums/Akon_-_Freedom.jpg">
+              <h3 class="overlay_text">
+                Akon, Wyclef Jean - Sunny Day
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="http://www.music-bazaar.com/album-images/vol3/165/165420/1010747-big/The-Life-Pursuit-cover.jpg">
+              <h3 class="overlay_text">
+                Belle & Sebastian - Another Sunny Day
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="https://d1itmove024qgx.cloudfront.net/3137fce34f56f00131de5383093a9255688e4624.jpg">
+              <h3 class="overlay_text">
+                Hippie Sabotage - Ridin Solo (Njomza Remix)
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="http://thestarscoopcom.fatcow.com/wp-content/uploads/2010/09/augustana1.jpg">
+              <h3 class="overlay_text">
+                Augustana - Boston
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="http://streamd.hitparade.ch/cdimages/ike_tina_turner-sweet_rhode_island_red_s.jpg">
+              <h3 class="overlay_text">
+                Miley Cyrus - Drive
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="album-container">
+              <img src="https://img.discogs.com/pc6YbA04DraOp7c4JNjbHd06Iy8=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-413332-1270367493.jpeg.jpg">
+              <h3 class="overlay_text">
+                Ike & Tina Turner - Sweet Rhode Island Red
+              </h3>
+            </div>
+          </div>
+          <div class="column">
+            <div class="album-container">
+              <img src="https://img.discogs.com/pc6YbA04DraOp7c4JNjbHd06Iy8=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-413332-1270367493.jpeg.jpg">
+              <h3 class="overlay_text">
+                Katrina & The Waves - Walking On Sunshine
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa1eT22GzsTHqGeEz2podc71M-WqmTMjU&libraries=places,geometry"></script>
+  <!--script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script-->
+  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa1eT22GzsTHqGeEz2podc71M-WqmTMjU&callback=initMap"></script>-->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="script.js"></script>
+  
+  
+</body>
+
+</html>
