@@ -16,6 +16,27 @@ h1.ui.header {
   height: 105%;
 }
 
+#back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 100px;
+  z-index: 1000;
+  background: #21d060;
+  color: white;
+  width: 60px;
+  height: 60px;
+  font-size: 34px;
+  line-height: 60px;
+  font-weight: 100;
+  box-shadow: 0 5px rgba(0,0,0,0.1);
+  transition: 0.3s all;
+}
+
+#back:hover {
+  background: #27b259;
+  cursor: pointer;
+}
 #body-overlay .grid {
   height: 100%;
 }
@@ -46,6 +67,11 @@ button.ui.primary.button {
 }
 #right {
   height: 100%;
+  width: 27%;
+  float:right;
+  position:relative;
+  box-shadow: 0 0 50px rgba(0,0,0, 0.2);
+
 }
 #right-panel {
   line-height: 30px;
@@ -80,8 +106,6 @@ body {
 }
 
 #right-panel {
-  float: right;
-  width: 27%;
   padding:50px;
   overflow: auto;
   height: 88%;
@@ -94,8 +118,7 @@ body {
 }
 
 #spotify {
-  float: right;
-  width: 27%;
+  width:100%;
   height: 15%;
 }
 

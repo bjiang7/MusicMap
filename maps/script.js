@@ -10,6 +10,7 @@ var album_covers =
 'http://upload.wikimedia.org.rsz.io/wikipedia/en/8/8e/MichaelBuble-Christmas(2011)-Cover.png?width=50'
 ];
 
+var markers = []
     function setMarkers(map) {
       // Adds markers to the map.
 
@@ -49,6 +50,7 @@ var album_covers =
           title: dest[0],
           zIndex: dest[3]
         });
+        markers.push(marker)
       }
     }
 
@@ -64,29 +66,6 @@ var album_covers =
       })
       var styledMapType = new google.maps.StyledMapType(styles, {name: 'Styled'});
       map.mapTypes.set('Styled', styledMapType);
-      // // Try HTML5 geolocation.
-      // if (navigator.geolocation) {
-      //   navigator.geolocation.getCurrentPosition(function(position) {
-      //     var pos = {
-      //       lat: position.coords.latitude,
-      //       lng: position.coords.longitude
-      //     };
-
-      //     map.setCenter(pos);
-      //   }, function() {
-      //     handleLocationError(true, infoWindow, map.getCenter());
-      //   });
-      // } else {
-      //   // Browser doesn't support Geolocation
-      //   handleLocationError(false, infoWindow, map.getCenter());
-      // }
-
-      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      //   infoWindow.setPosition(pos);
-      //   infoWindow.setContent(browserHasGeolocation ?
-      //     'Error: The Geolocation service failed.' :
-      //     'Error: Your browser doesn\'t support geolocation.');
-      // }
     }
 
     initMap()
@@ -119,35 +98,69 @@ var album_covers =
       displayRoute(destinations[0][0], destinations[destinations.length - 1][0], directionsService,
         directionsDisplay);
     }
+    var dept_box = document.getElementById('depart')
+    var arrive_box = document.getElementById('arrive')
+    var autocomplete1 = new google.maps.places.Autocomplete(dept_box);
+    autocomplete1.addListener('place_changed', function() {
+      var place = autocomplete1.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+    });
+    var autocomplete2 = new google.maps.places.Autocomplete(arrive_box);
+    autocomplete2.addListener('place_changed', function() {
+      var place = autocomplete2.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+    });
 
     $("#create-playlist").click(function() {
-      $('#body-overlay').fadeOut()
-      var depart = $('#depart').val()
-      var arrive = $('#arrive').val()
-      var geocoder = new google.maps.Geocoder();
-      geocoder.geocode({'address': depart}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK)
-            {
-                console.log(results[0].formatted_address)
-                destinations.push([results[0].formatted_address, results[0].geometry.lat, results[0].geometry.lng, count++])
-            }
-            else {
-                console.log("Geocode unsuccessful - " + status);
-            }
-      })
-      geocoder.geocode({'address': arrive}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK)
-            {
-                console.log(results[0].formatted_address)
-                destinations.push([results[0].formatted_address, results[0].geometry.lat, results[0].geometry.lng, count++]);
-                initRoute();
-            }
-            else {
-                console.log("Geocode unsuccessful - " + status);
-            }
-      })
+      console.log(destinations)
+      if ($('#depart').val() != "" && $('#arrive').val() != "") {
+        $('#body-overlay').fadeOut()
+        $('#back').fadeIn()
+        var depart = $('#depart').val()
+        var arrive = $('#arrive').val()
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': depart}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK)
+              {
+                  console.log(results[0].formatted_address)
+                  destinations.push([results[0].formatted_address, results[0].geometry.lat, results[0].geometry.lng, count++])
+              }
+              else {
+                  console.log("Geocode unsuccessful - " + status);
+              }
+        })
+        geocoder.geocode({'address': arrive}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK)
+              {
+                  console.log(results[0].formatted_address)
+                  destinations.push([results[0].formatted_address, results[0].geometry.lat, results[0].geometry.lng, count++]);
+                  initRoute();
+              }
+              else {
+                  console.log("Geocode unsuccessful - " + status);
+              }
+        })
+      }
+    })
 
-      
+    $('#back').click(function() {
+      $('#back').fadeOut()
+      markers = []
+      $('#body-overlay').fadeIn()
+      $('#depart').val(destinations[0][0])
+      $('#arrive').val(destinations[1][0])
+      destinations = []
+      count = 0
     })
 
     function displayRoute(origin, destination, service, display) {
