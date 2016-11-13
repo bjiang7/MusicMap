@@ -1,5 +1,79 @@
+body {
+  font-family: Lato;
+  overflow:hidden;
+}
+h1.ui.header {
+  font-weight: 300;
+  color: #21d060;
+  font-size:46px;
+}
+#body-overlay {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+}
+#body-overlay, #body-overlay .maps-bg {
+  height: 105%;
+}
+
+#back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 100px;
+  z-index: 1000;
+  background: #21d060;
+  color: white;
+  width: 60px;
+  height: 60px;
+  font-size: 34px;
+  line-height: 60px;
+  font-weight: 100;
+  box-shadow: 0 5px rgba(0,0,0,0.1);
+  transition: 0.3s all;
+}
+
+#back:hover {
+  background: #27b259;
+  cursor: pointer;
+}
+#body-overlay .grid {
+  height: 100%;
+}
+
+#body-overlay .grid {
+  background: rgba(255,255,255,0.8);
+}
+
+#body-overlay .maps-bg {
+  background: url(bg.png) center;
+}
+
+#body-overlay .column{
+  text-align: center;
+}
+
+#body-overlay .ui input {
+  margin: 10px;
+  width: 250px;
+}
+
+.options {
+  margin: 10px 0 20px;
+}
+
+button.ui.primary.button {
+  background: #21d060;
+}
+#right {
+  height: 100%;
+  width: 27%;
+  float:right;
+  position:relative;
+  box-shadow: 0 0 50px rgba(0,0,0, 0.2);
+
+}
 #right-panel {
-  font-family: 'Roboto', 'sans-serif';
   line-height: 30px;
   padding-left: 10px;
 }
@@ -27,16 +101,15 @@ body {
 #map {
   height: 100%;
   float: left;
-  width: 63%;
-  height: 100%;
+  width: 73%;
   padding: 0;
 }
 
 #right-panel {
-  float: right;
-  width: 34%;
-  overflow: scroll;
-  height: 83%;
+  padding:50px;
+  overflow: auto;
+  height: 88%;
+  padding-bottom:0;
 }
 
 .panel {
@@ -45,8 +118,7 @@ body {
 }
 
 #spotify {
-  float: right;
-  margin-top: 2.2%;
-  width: 37%;
+  width:100%;
   height: 15%;
 }
+

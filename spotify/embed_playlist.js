@@ -24,20 +24,6 @@ spotifyApi.setAccessToken("5da88054df974a3881337d30f15d6b77");
 //   }
 // ));
 
-get('/auth/spotify',
-  passport.authenticate('spotify'),
-  function(req, res){
-    // The request will be redirected to spotify for authentication, so this
-    // function will not be called.
-  });
-
-get('/auth/spotify/callback',
-  passport.authenticate('spotify', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
-
 // Output: a playlist JSON
 function get_time_playlist() {
 	var date = new Date();

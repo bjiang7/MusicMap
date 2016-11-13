@@ -1,0 +1,152 @@
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>
+<div id="map_canvas" style="float:left;width:70%;height:400px;"></div>
+<ul></ul>
+<script>
+  var directions={};
+   
+   
+  function ginit() 
+  {
+    var opts = {
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: new google.maps.LatLng(52.524268, 13.406290000000013)
+    }
+    
+    map = new google.maps.Map(document.getElementById("map_canvas"), opts);
+    
+   
+    var routes=[
+                { label:'Erkner',
+                  request:{
+                    origin: new google.maps.LatLng(52.524268, 13.406290000000013), 
+                    destination: new google.maps.LatLng(52.4244119, 13.749783200000024), 
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING},
+                  rendering:{marker:{icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png'},draggable:true}
+                },
+                { label:'Potsdam',
+                  request:{
+                    origin: new google.maps.LatLng(52.524268, 13.406290000000013), 
+                    destination: new google.maps.LatLng(52.3941887, 13.072690999999963), 
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING},
+                  rendering:{marker:{icon: 'http://labs.google.com/ridefinder/images/mm_20_red.png'},draggable:true}
+                },
+                { label:'Bernau',
+                  request:{
+                    origin: new google.maps.LatLng(52.524268, 13.406290000000013), 
+                    destination: new google.maps.LatLng(52.683483, 13.587553999999955), 
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING},
+                  rendering:{marker:{icon: 'http://labs.google.com/ridefinder/images/mm_20_yellow.png'},draggable:true}
+                }
+               ];
+    var bounds=new google.maps.LatLngBounds();
+        
+    var dists=[5000,3000,1000];
+    var selects=document.createElement('select');
+    list=document.getElementsByTagName('ul')[0];
+    for(var d=0;d<dists.length;++d)
+    {
+      selects.options[selects.options.length]=new Option(dists[d],dists[d],d==0,d==0);
+    }
+    
+    for(var r=0;r<routes.length;++r)
+    {
+      bounds.extend(routes[r].request.destination);
+      routes[r].rendering.routeId='r'+r+new Date().getTime();
+      routes[r].rendering.dist=dists[0];
+      var select=selects.cloneNode(true);
+          select.setAttribute('name',routes[r].rendering.routeId);
+          select.onchange=function(){directions[this.name].renderer.dist=this.value;setMarkers(this.name)};
+      list.appendChild(document.createElement('li'));
+      list.lastChild.appendChild(select);
+      list.lastChild.appendChild(document.createTextNode(routes[r].label));
+      
+      requestRoute(routes[r],map);
+    } 
+    map.fitBounds(bounds) ;
+  }
+  
+
+  function setMarkers(ID)
+  {
+    var direction=directions[ID],
+        renderer=direction.renderer,
+        dist=renderer.dist,
+        marker=renderer.marker,
+        map=renderer.getMap(),
+        dirs=direction.renderer.getDirections();
+        marker.map=map;
+
+    for(var k in direction.sets)
+    {
+       
+       var set=directions[ID].sets[k];
+           set.visible=!!(k===dist);
+           
+       for(var m=0;m<set.length;++m)
+       {
+          
+          set[m].setMap((set.visible)?map:null);
+       } 
+    }
+    if(!direction.sets[dist])
+    {
+      if(dirs.routes.length)
+      {
+        var route=dirs.routes[0];
+        var az=0;
+        for(var i=0;i<route.legs.length;++i)
+        {
+          if(route.legs[i].distance)
+          {
+            az+=route.legs[i].distance.value;
+          }
+          
+        }
+       dist=Math.max(dist,Math.round(az/100));
+       direction.sets[dist]=gMilestone(route,dist,marker);
+        
+      }
+    }
+  }
+  
+  function requestRoute(route,map) 
+  {
+    if(!window.gDirSVC)
+    {
+      window.gDirSVC = new google.maps.DirectionsService();
+    }
+        
+    var renderer=new google.maps.DirectionsRenderer(route.rendering);
+     var renderer=new google.maps.DirectionsRenderer(route.rendering);
+        renderer.setMap(map);
+        renderer.setOptions({preserveViewport:true})
+        
+    
+    google.maps.event.addListener(renderer, 'directions_changed', function() {
+          
+          if(directions[this.routeId])
+          {
+           //remove markers
+            for(var k in directions[this.routeId].sets)
+            {              
+                for(var m=0;m<directions[this.routeId].sets[k].length;++m)
+                {
+                  directions[this.routeId].sets[k][m].setMap(null);
+                }
+            }
+          }
+
+          directions[this.routeId]={renderer:this,sets:{}};
+          setMarkers(this.routeId);
+          
+    });
+
+    window.gDirSVC.route(route.request, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        renderer.setDirections(response);
+    }
+    });
+  }
+  
+</script>
